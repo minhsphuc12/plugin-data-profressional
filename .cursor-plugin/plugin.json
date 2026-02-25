@@ -1,0 +1,9 @@
+{
+  "name": "plugin-data-professional",
+  "version": "1.0.0",
+  "description": "Data team toolkit: Analyst, Scientist, Engineer agents, skills and commands with optional subagent usage",
+  "author": {
+    "name": "Data Team"
+  },
+  "keywords": ["data", "analytics", "DWH", "ETL", "ML", "subagent"]
+}
