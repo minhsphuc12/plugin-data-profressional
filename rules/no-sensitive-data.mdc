@@ -1,0 +1,26 @@
+---
+description: Do not leak personal or enterprise information in this repo
+alwaysApply: true
+---
+
+# No Personal or Enterprise Information
+
+This project must **not** contain:
+
+- **Secrets**: API keys, passwords, tokens, private keys, connection strings with credentials
+- **Personal data**: Real email addresses, phone numbers, IDs (use placeholders like `user@example.com`, `{{EMAIL}}`)
+- **Enterprise-internal data**: Real DB names, schema names, server hostnames, internal URLs, or company-specific identifiers unless they are generic placeholders (e.g. `{{DB_ALIAS}}`, `DWH`)
+
+### Do
+
+- Use placeholders in prompts and docs: `{{TABLE_NAME}}`, `{{DB_ALIAS}}`, `user@example.com`
+- Keep examples generic (e.g. `FACT_SALES`, `DWH`, `documents/`)
+- Run `./scripts/security-check.sh` before committing when you change prompts, docs, or config
+
+### Do not
+
+- Commit real credentials, keys, or connection strings
+- Put real email/phone or internal hostnames in prompts, commands, or documentation
+- Paste output that contains real table names, schema names, or environment details from production
+
+See `docs/SECURITY.md` for the full security check and remediation steps.

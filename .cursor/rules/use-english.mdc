@@ -1,0 +1,31 @@
+---
+description: Use English for all project code, comments, docs, and messages
+alwaysApply: true
+---
+
+# Use English in This Project
+
+Use **English** for everything in this project:
+
+- **Code**: Variable names, function names, class names, file names
+- **Comments**: Inline and block comments in source files
+- **Documentation**: README, docs, JSDoc/TSDoc, docstrings
+- **Commit messages**: Use English in git commit messages
+- **UI strings**: User-facing text, error messages, labels (unless the product explicitly targets another language)
+- **API**: Endpoint names, request/response field names, error codes
+
+When the user writes in another language (e.g. Vietnamese), respond in that language for conversation, but any code, comments, or documentation you add or suggest must be in English.
+
+### Examples
+
+```javascript
+// ✅ GOOD
+const maxRetryCount = 3;
+// Fetch user profile from API
+function getUserProfile(userId) {}
+
+// ❌ BAD (Vietnamese in code)
+const soLanThuLai = 3;
+// Lấy thông tin user từ API
+function layThongTinUser(idUser) {}
+```
