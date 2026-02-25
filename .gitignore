@@ -1,0 +1,41 @@
+# OS
+.DS_Store
+.DS_Store?
+Thumbs.db
+ehthumbs.db
+
+# Editor / IDE
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+*.sublime-*
+
+# Logs and temp
+*.log
+npm-debug.log*
+.cache/
+tmp/
+temp/
+*.tmp
+
+# Environment and secrets
+.env
+.env.local
+.env.*.local
+*.pem
+secrets/
+
+# Dependencies (if added later)
+node_modules/
+
+# Build / output (if added later)
+dist/
+build/
+out/
+*.tsbuildinfo
+
+# Optional: local Cursor overrides (uncomment if you want to ignore)
+# .cursor/

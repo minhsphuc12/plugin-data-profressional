@@ -1,0 +1,30 @@
+# Gitleaks config: prevent secrets and credentials from being committed.
+# Run: gitleaks detect --source . --config .gitleaks.toml --verbose
+# See docs/SECURITY.md for full security check usage.
+
+title = "plugin-data-professional secret scan"
+
+[extend]
+useDefault = true
+
+# Allowlist: reduce false positives from examples and docs
+[allowlist]
+description = "Example placeholders and doc-only content"
+regexTarget = "line"
+paths = [
+  '\.gitleaks\.toml$',
+  'docs/SECURITY\.md$',
+  'scripts/security-check\.sh$'
+]
+regexes = [
+  '(?i)example',
+  '(?i)placeholder',
+  '(?i)sample',
+  '(?i)dummy',
+  '(?i)your-?value',
+  '(?i)replace-?me',
+  '{{[A-Z_]+}}',           # e.g. {{TABLE_NAME}}, {{DB_ALIAS}}
+  'e\.g\.\s*\w+',          # e.g. DWH, FACT_SALES
+  'DWH_ADMIN|DWH\b',       # doc example aliases
+  'FACT_SALES'             # doc example table name
+]
