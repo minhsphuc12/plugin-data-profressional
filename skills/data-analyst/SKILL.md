@@ -28,4 +28,6 @@ All checkpoints stay with the main agent. See `docs/SUBAGENT-USAGE.md` for the f
 
 **Standalone actions (use flexibly):** search-glossary, search-documents, search-schema; inspect-table, sample-table, find-relationships; data-mapping, design-query, debug-query, optimize-query, finalize-task.
 
+**Knowledge map (domain mapping):** map-domain (start proactive session using data-knowledge-map skill), sync-domain-diagram. See `skills/data-knowledge-map/SKILL.md`.
+
 See `commands/` and `docs/COMMANDS.md`.
