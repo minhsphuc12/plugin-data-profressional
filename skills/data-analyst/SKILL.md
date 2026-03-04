@@ -24,4 +24,8 @@ All checkpoints stay with the main agent. See `docs/SUBAGENT-USAGE.md` for the f
 
 ## Plugin commands
 
-- data-brief, discover-tables, run-lineage, explain-query, full-analysis, skip-checkpoints (see `commands/`).
+**Full / phase-based:** data-brief, discover-tables, run-lineage, explain-query, full-analysis, skip-checkpoints.
+
+**Standalone actions (use flexibly):** search-glossary, search-documents, search-schema; inspect-table, sample-table, find-relationships; data-mapping, design-query, debug-query, optimize-query, finalize-task.
+
+See `commands/` and `docs/COMMANDS.md`.
