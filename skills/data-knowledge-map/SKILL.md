@@ -17,7 +17,7 @@ Build a **system-level knowledge map** of a database domain through continuous i
 
 Workspace should have (same as pro-data-analyst):
 
-- `scripts/`: search_schema, search_documents, check_table, find_relationships, sample_data
+- `scripts/`: search_schema, search_documents, check_table, find_relationships, sample_data (see [Scripts Reference](#scripts-reference) for purpose and usage)
 - `documents/`: DWH/source metadata Excel if available
 - `knowledge/`: existing single-table, multiple-tables, glossary (read/update optional)
 
@@ -31,6 +31,20 @@ Workspace should have (same as pro-data-analyst):
 | `knowledge/domains/{domain-slug}/domain.mmd` | Mermaid diagram (ER or flowchart) reflecting the same tables and relationships. |
 
 **Sync rule:** When tables or relationships change, update both `domain.md` and `domain.mmd` so they stay aligned.
+
+## Scripts Reference
+
+Tools in `scripts/` used during discovery and relationship mapping. Use the same db alias (e.g. `DWH`) as in your workspace; replace `DWH` with your configured alias if different.
+
+| Script | Purpose | Key usage |
+|--------|---------|-----------|
+| `scripts/search_schema.py` | Search database metadata (table/column names and comments) by keyword. Regex by default; use `\|` for multiple terms. | `python scripts/search_schema.py --keyword "revenue\|order" --db DWH` — optional: `--search-in comments`, `--schema OWNER` |
+| `scripts/search_documents.py` | Search Excel metadata (DWH + source tables/columns) in `documents/`. Regex by default. | `python scripts/search_documents.py --keyword "sales\|customer" --folder documents/` |
+| `scripts/check_table.py` | Inspect one table: structure, column names, types, and comments. | `python scripts/check_table.py SCHEMA TABLE_NAME --db DWH` |
+| `scripts/sample_data.py` | Sample rows from a table; optional profiling for key columns. | Sample: `python scripts/sample_data.py --schema SCHEMA --table TABLE_NAME --db DWH` — with profiling: add `--profile` |
+| `scripts/find_relationships.py` | Find FK-like and join paths for one table or a pair of tables. | One table: `python scripts/find_relationships.py --schema SCHEMA --table TABLE --db DWH` — pair: `--tables TABLE1,TABLE2` |
+
+**Optional (not in core workflow):** `scripts/search_glossary.py` — if you need business terms or KPI definitions when scoping the domain: `python scripts/search_glossary.py --keyword "term\|KPI" --folder documents/`.
 
 ## Workflow (with checkpoints)
 
