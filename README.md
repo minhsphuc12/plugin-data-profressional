@@ -6,7 +6,7 @@ Cursor plugin for the data team: **Data Analyst**, **Data Scientist**, and **Dat
 
 - **Agents:** `agents/data-analyst.md`, `data-scientist.md`, `data-engineer.md` — when to use which role.
 - **Skills:** `skills/data-analyst/`, `data-scientist/`, `data-engineer/` — each has `SKILL.md` with frontmatter. Data Analyst wraps the full pro-data-analyst workflow and optional subagent usage.
-- **Commands:** `commands/data-brief.md`, `discover-tables.md`, `run-lineage.md`, `explain-query.md`, `full-analysis.md`, `skip-checkpoints.md` — analyst workflow triggers; some support a "subagent" option.
+- **Commands:** `commands/da-data-brief.md`, `da-discover-tables.md`, `da-run-lineage.md`, `da-explain-query.md`, `da-full-analysis.md`, `da-skip-checkpoints.md` (analyst); `commands/dk-map-domain.md`, `dk-sync-domain-diagram.md` (knowledge map) — some support a "subagent" option.
 - **Docs:** `docs/AGENTS.md`, `SKILLS.md`, `COMMANDS.md`, `SUBAGENT-USAGE.md` — catalog and I/O contract for subagents.
 - **Prompts:** `prompts/discovery.md`, `lineage.md`, `explain-and-run.md` — templates to pass into subagent tasks (fill placeholders before use).
 
@@ -16,7 +16,7 @@ Install as a Cursor plugin (e.g. from repo or local path). Ensure `.cursor-plugi
 
 ## Usage
 
-1. **Data Analyst:** Invoke by intent ("revenue report", "find tables for X", "lineage for table Y") or use a command (e.g. full-analysis, discover-tables). Say "run discovery in subagent" or "lineage via subagent" to delegate those steps.
+1. **Data Analyst:** Invoke by intent ("revenue report", "find tables for X", "lineage for table Y") or use a command (e.g. da-full-analysis, da-discover-tables). Say "run discovery in subagent" or "lineage via subagent" to delegate those steps.
 2. **Data Scientist:** Invoke by intent ("correlation analysis", "train model", "ML pipeline"). Uses the data-scientist skill wrapper (pandas, ML, notebooks).
 3. **Data Engineer:** Invoke by intent ("ETL from X", "DWH table design", "data quality check"). Uses the data-engineer skill wrapper (ETL, DWH, orchestration).
 

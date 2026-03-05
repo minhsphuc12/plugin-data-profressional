@@ -1,5 +1,5 @@
 ---
-name: search-documents
+name: da-search-documents
 description: Search Excel metadata (DWH + source) by keyword. Standalone action from pro-data-analyst Phase 2a.
 ---
 

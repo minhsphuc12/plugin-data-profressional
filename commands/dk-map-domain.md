@@ -1,5 +1,5 @@
 ---
-name: map-domain
+name: dk-map-domain
 description: Start a proactive knowledge-map session for a database domain. Uses data-knowledge-map skill; interactive with checkpoints.
 ---
 

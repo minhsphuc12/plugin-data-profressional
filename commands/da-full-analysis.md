@@ -1,5 +1,5 @@
 ---
-name: full-analysis
+name: da-full-analysis
 description: Run full 7-phase pro-data-analyst workflow with all 4 checkpoints. Optionally use subagent only for Phase 2 or 5.
 ---
 

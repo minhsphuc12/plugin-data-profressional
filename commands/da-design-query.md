@@ -1,5 +1,5 @@
 ---
-name: design-query
+name: da-design-query
 description: Design SQL query from data mapping (CTEs, comments, PII-safe). Standalone action from pro-data-analyst Phase 4.
 ---
 
@@ -12,4 +12,4 @@ description: Design SQL query from data mapping (CTEs, comments, PII-safe). Stan
 3. Save to `{task-folder}/{task-folder}_query.sql`.
 4. If used in full workflow, present query logic and run **[CHECKPOINT 4]**. Standalone: present logic summary for review.
 
-Do not execute the query in this action; use explain-query or run_query_safe separately.
+Do not execute the query in this action; use da-explain-query or run_query_safe separately.

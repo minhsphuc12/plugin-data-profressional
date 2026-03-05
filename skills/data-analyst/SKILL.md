@@ -24,10 +24,10 @@ All checkpoints stay with the main agent. See `docs/SUBAGENT-USAGE.md` for the f
 
 ## Plugin commands
 
-**Full / phase-based:** data-brief, discover-tables, run-lineage, explain-query, full-analysis, skip-checkpoints.
+**Full / phase-based:** da-data-brief, da-discover-tables, da-run-lineage, da-explain-query, da-full-analysis, da-skip-checkpoints.
 
-**Standalone actions (use flexibly):** search-glossary, search-documents, search-schema; inspect-table, sample-table, find-relationships; data-mapping, design-query, debug-query, optimize-query, finalize-task.
+**Standalone actions (use flexibly):** da-search-glossary, da-search-documents, da-search-schema; da-inspect-table, da-sample-table, da-find-relationships; da-data-mapping, da-design-query, da-debug-query, da-optimize-query, da-finalize-task.
 
-**Knowledge map (domain mapping):** map-domain (start proactive session using data-knowledge-map skill), sync-domain-diagram. See `skills/data-knowledge-map/SKILL.md`.
+**Knowledge map (domain mapping):** dk-map-domain (start proactive session using data-knowledge-map skill), dk-sync-domain-diagram. See `skills/data-knowledge-map/SKILL.md`.
 
 See `commands/` and `docs/COMMANDS.md`.

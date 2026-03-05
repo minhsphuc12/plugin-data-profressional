@@ -1,5 +1,5 @@
 ---
-name: find-relationships
+name: da-find-relationships
 description: Find FK and join paths for one or more tables. Standalone action from pro-data-analyst Phase 2d.
 ---
 

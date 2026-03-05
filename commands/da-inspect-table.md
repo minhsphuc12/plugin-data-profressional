@@ -1,5 +1,5 @@
 ---
-name: inspect-table
+name: da-inspect-table
 description: Inspect table structure and column comments. Standalone action from pro-data-analyst Phase 2d.
 ---
 

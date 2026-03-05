@@ -1,5 +1,5 @@
 ---
-name: discover-tables
+name: da-discover-tables
 description: Run Phase 2a–2c data discovery (docs, schema, prior queries). Optional subagent for isolated context.
 ---
 

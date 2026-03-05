@@ -1,11 +1,11 @@
 ---
-name: debug-query
+name: da-debug-query
 description: Isolate faulty CTE when query returns empty/NULL or runs too slow. Standalone action from pro-data-analyst Phase 5c.
 ---
 
 # Debug query (Phase 5c)
 
-**Isolate the faulty CTE** when the query has abnormal results: 0 rows, important columns all NULL, or timeout/very slow. Use after explain-query or run_query_safe shows a problem.
+**Isolate the faulty CTE** when the query has abnormal results: 0 rows, important columns all NULL, or timeout/very slow. Use after da-explain-query or run_query_safe shows a problem.
 
 1. Require: **query file** (with CTEs) and **db alias**. User should specify symptom: **empty/NULL** or **slow**.
 2. **Empty result or key columns all NULL (bottom-up):** Remove or bypass the **last** CTE layer; run the shortened query. If rows/non-null appear, the removed CTE (or step feeding it) is the cause. Repeat by removing the next-to-last CTE until the problem disappears.

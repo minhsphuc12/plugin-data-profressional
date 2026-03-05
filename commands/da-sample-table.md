@@ -1,5 +1,5 @@
 ---
-name: sample-table
+name: da-sample-table
 description: Sample table data and optionally run profiling. Standalone action from pro-data-analyst Phase 2d.
 ---
 

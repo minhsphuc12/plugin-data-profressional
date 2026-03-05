@@ -1,5 +1,5 @@
 ---
-name: run-lineage
+name: da-run-lineage
 description: Run Phase 2e lineage for a table/column. Default is to use a subagent for isolated context.
 ---
 

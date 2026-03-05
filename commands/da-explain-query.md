@@ -1,5 +1,5 @@
 ---
-name: explain-query
+name: da-explain-query
 description: Run EXPLAIN PLAN and safe execution (Phase 5). Optional subagent for isolated context.
 ---
 

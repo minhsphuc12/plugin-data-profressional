@@ -1,5 +1,5 @@
 ---
-name: search-schema
+name: da-search-schema
 description: Search database schema metadata (names and comments) by keyword. Standalone action from pro-data-analyst Phase 2b.
 ---
 

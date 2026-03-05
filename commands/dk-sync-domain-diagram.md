@@ -1,5 +1,5 @@
 ---
-name: sync-domain-diagram
+name: dk-sync-domain-diagram
 description: Regenerate the Mermaid diagram for a domain from its current domain.md. Use after editing domain.md or when diagram and doc are out of sync.
 ---
 

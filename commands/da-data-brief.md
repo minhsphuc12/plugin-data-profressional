@@ -1,5 +1,5 @@
 ---
-name: data-brief
+name: da-data-brief
 description: Create task brief (Phase 1) for a business question. Uses pro-data-analyst Phase 1 only.
 ---
 

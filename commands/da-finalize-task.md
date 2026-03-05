@@ -1,5 +1,5 @@
 ---
-name: finalize-task
+name: da-finalize-task
 description: Save query, update mapping, distill knowledge, write task report. Standalone action from pro-data-analyst Phase 7.
 ---
 
@@ -13,4 +13,4 @@ description: Save query, update mapping, distill knowledge, write task report. S
 4. **Knowledge distillation**: Update `knowledge/single-table/`, `knowledge/multiple-tables/`, and optionally `knowledge/glossary/` (one file per table/join/term; read existing then merge/append with date and task context). Do not write real data samples, PII, or internal identifiers.
 5. Write task report `{task-folder}_README.md`: 7-phase summary, key tables/columns, performance notes, assumptions, links to created files.
 
-No checkpoint. Use after explain-query and optionally optimize-query.
+No checkpoint. Use after da-explain-query and optionally da-optimize-query.

@@ -1,5 +1,5 @@
 ---
-name: search-glossary
+name: da-search-glossary
 description: Search business glossary for terms/KPIs. Standalone action from pro-data-analyst Phase 1.
 ---
 
