@@ -27,8 +27,10 @@ Workspace should have (same as pro-data-analyst):
 |------|---------|
 | `knowledge/system/` | Index or list of mapped domains (e.g. `index.md`). |
 | `knowledge/domains/{domain-slug}/` | One folder per domain (e.g. `sales`, `customer`). |
-| `knowledge/domains/{domain-slug}/domain.md` | Structured markdown: scope, tables, relationships, data flow, links to single-table/multiple-tables. |
-| `knowledge/domains/{domain-slug}/domain.mmd` | Mermaid diagram (ER or flowchart) reflecting the same tables and relationships. |
+| `knowledge/domains/{domain-slug}/{system-prefix}_{domain-slug}_domain.md` | Structured markdown: scope, tables, relationships, data flow, links to single-table/multiple-tables. |
+| `knowledge/domains/{domain-slug}/{system-prefix}_{domain-slug}_domain.mmd` | Mermaid diagram (ER or flowchart) reflecting the same tables and relationships. |
+
+**System prefix rule:** For every knowledge file this skill creates or updates (`knowledge/domains/`, `knowledge/system/`, `knowledge/single-table/`, `knowledge/multiple-tables/`), the filename must start with a **system prefix** (e.g. database alias or system code such as `DWH`, `CRM`). Use the same alias you pass to scripts (e.g. `--db DWH`) so files from different systems are clearly distinguishable.
 
 **Sync rule:** When tables or relationships change, update both `domain.md` and `domain.mmd` so they stay aligned.
 
@@ -52,9 +54,9 @@ Run in order. **Stop at each [MAP CHECKPOINT]** and wait for user confirmation b
 
 ### Step 1: Scope the domain
 
-- **1a.** Ask or infer: domain name (e.g. Sales, Customer), target schema(s), and optional keywords (e.g. "revenue", "order").
+- **1a.** Ask or infer: domain name (e.g. Sales, Customer), target schema(s), **system prefix** (e.g. `DWH`, `CRM`), and optional keywords (e.g. "revenue", "order").
 - **1b.** Create **domain slug** (lowercase, hyphens): e.g. `sales`, `customer-360`. Create folder `knowledge/domains/{domain-slug}/` if it does not exist.
-- **1c.** If the domain was mapped before: read `knowledge/domains/{domain-slug}/domain.md` (and optional `domain.mmd`) and summarize what is already there. Ask whether to extend, replace, or start fresh.
+- **1c.** If the domain was mapped before: read `knowledge/domains/{domain-slug}/{system-prefix}_{domain-slug}_domain.md` (and optional `{system-prefix}_{domain-slug}_domain.mmd`) and summarize what is already there. Ask whether to extend, replace, or start fresh.
 
 **[MAP CHECKPOINT 1]** — Confirm scope: domain name, schema(s), and whether to extend existing map or start new.
 
@@ -91,9 +93,9 @@ Run in order. **Stop at each [MAP CHECKPOINT]** and wait for user confirmation b
 
 ### Step 5: Write markdown and diagram (and keep in sync)
 
-- **5a.** Write or update `knowledge/domains/{domain-slug}/domain.md` using the template below. Include links to `knowledge/single-table/` and `knowledge/multiple-tables/` where relevant.
-- **5b.** Write or update `knowledge/domains/{domain-slug}/domain.mmd` with a Mermaid diagram (ER or flowchart) that matches the same tables and relationships. Use consistent node names (e.g. schema.table or short labels keyed in the doc).
-- **5c.** Optionally update `knowledge/system/index.md` (or equivalent): add or update a line for this domain with a short description and link to `knowledge/domains/{domain-slug}/domain.md`.
+- **5a.** Write or update `knowledge/domains/{domain-slug}/{system-prefix}_{domain-slug}_domain.md` using the template below. Include links to `knowledge/single-table/` and `knowledge/multiple-tables/` where relevant, keeping their existing `{db}_{schema}_{table}.md` / `{db}_{t1}_{t2}.md` **system-prefixed** naming.
+- **5b.** Write or update `knowledge/domains/{domain-slug}/{system-prefix}_{domain-slug}_domain.mmd` with a Mermaid diagram (ER or flowchart) that matches the same tables and relationships. Use consistent node names (e.g. schema.table or short labels keyed in the doc).
+- **5c.** Optionally update `knowledge/system/index.md` (or equivalent): add or update a line for this domain with a short description and link to `knowledge/domains/{domain-slug}/{system-prefix}_{domain-slug}_domain.md`.
 - **5d.** If the user already has single-table/multiple-tables knowledge files for this domain, add a short "See also" in `domain.md` and do not duplicate long content; link instead.
 
 **[MAP CHECKPOINT 5]** — Present the written paths and a short summary. Ask if the user wants to refine the diagram (e.g. layout, more/fewer tables) or add a new domain in a follow-up session.
