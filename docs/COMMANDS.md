@@ -1,6 +1,6 @@
 # Commands Catalog (Data Team)
 
-Commands live in `commands/` with frontmatter `name` and `description`. Option "subagent" means the step can be run via `mcp_task` in a subagent. All analyst commands map to **pro-data-analyst** skill phases.
+Commands live in `commands/` with frontmatter `name` and `description`. **Using these commands in another Cursor project:** see [USING-COMMANDS-IN-OTHER-PROJECTS.md](USING-COMMANDS-IN-OTHER-PROJECTS.md). Option "subagent" means the step can be run via `mcp_task` in a subagent. All analyst commands map to **pro-data-analyst** skill phases.
 
 ## Full workflow
 

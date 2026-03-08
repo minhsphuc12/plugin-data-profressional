@@ -1,0 +1,38 @@
+---
+description: Resolve and run Data Team commands from commands/; catalog reference in docs/COMMANDS.md
+alwaysApply: true
+---
+
+# Commands in Cursor (Data Team)
+
+Commands are invoked **directly in chat**: type the command name (and any arguments) and the agent will run that workflow.
+
+## How to use
+
+1. In Cursor Chat or Composer, type the command name, optionally with parameters.
+2. Examples:
+   - `da-search-glossary revenue`
+   - `da-full-analysis` (then provide the business question when asked)
+   - `da-discover-tables` or `da-discover-tables subagent`
+   - `dk-map-domain` (for knowledge-map session)
+
+## Agent behavior
+
+When the user message **contains a known command name** (e.g. `da-search-glossary`, `da-full-analysis`, `da-data-brief`, `da-discover-tables`, `da-run-lineage`, `da-explain-query`, `da-inspect-table`, `da-sample-table`, `da-find-relationships`, `da-data-mapping`, `da-design-query`, `da-debug-query`, `da-optimize-query`, `da-finalize-task`, `da-skip-checkpoints`, `dk-map-domain`, `dk-sync-domain-diagram`):
+
+1. **Resolve the command**: Match to the command file `commands/<name>.md` (e.g. `commands/da-search-glossary.md`).
+2. **Read the command file**: Load the full content (frontmatter + body) from `commands/<name>.md`.
+3. **Execute**: Follow the instructions in that file (skill phases, scripts, checkpoints, subagent options as described). Use the user's remaining message as arguments/context (e.g. keywords for search, business question for full-analysis).
+
+If the user only says a command name without extra context, ask for any required input (e.g. business question for `da-full-analysis`, keyword for `da-search-glossary`).
+
+## Catalog reference
+
+- **Full workflow:** `da-full-analysis`, `da-skip-checkpoints`
+- **Phase-based:** `da-data-brief`, `da-discover-tables`, `da-run-lineage`, `da-explain-query`
+- **Search:** `da-search-glossary`, `da-search-documents`, `da-search-schema`
+- **Inspection:** `da-inspect-table`, `da-sample-table`, `da-find-relationships`
+- **Document & query:** `da-data-mapping`, `da-design-query`, `da-debug-query`, `da-optimize-query`, `da-finalize-task`
+- **Knowledge map:** `dk-map-domain`, `dk-sync-domain-diagram`
+
+Full list and subagent usage: see `docs/COMMANDS.md`. Using these commands in another project: see `docs/USING-COMMANDS-IN-OTHER-PROJECTS.md`.
