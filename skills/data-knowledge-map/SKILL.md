@@ -43,10 +43,28 @@ Tools in `scripts/` used during discovery and relationship mapping. Use the same
 | `scripts/search_schema.py` | Search database metadata (table/column names and comments) by keyword. Regex by default; use `\|` for multiple terms. | `python scripts/search_schema.py --keyword "revenue\|order" --db DWH` — optional: `--search-in comments`, `--schema OWNER` |
 | `scripts/search_documents.py` | Search Excel metadata (DWH + source tables/columns) in `documents/`. Regex by default. | `python scripts/search_documents.py --keyword "sales\|customer" --folder documents/` |
 | `scripts/check_table.py` | Inspect one table: structure, column names, types, and comments. | `python scripts/check_table.py SCHEMA TABLE_NAME --db DWH` |
-| `scripts/sample_data.py` | Sample rows from a table; optional profiling for key columns. | Sample: `python scripts/sample_data.py --schema SCHEMA --table TABLE_NAME --db DWH` — with profiling: add `--profile` |
+| `scripts/sample_data.py` | Sample rows from a table; optional profiling for key columns. Prefer **meaningful** data (see [Sampling meaningful data](#sampling-meaningful-data)). | Sample: `python scripts/sample_data.py --schema SCHEMA --table TABLE_NAME --db DWH` — with profiling: add `--profile` — if script supports: order by date/key so rows are representative |
 | `scripts/find_relationships.py` | Find FK-like and join paths for one table or a pair of tables. | One table: `python scripts/find_relationships.py --schema SCHEMA --table TABLE --db DWH` — pair: `--tables TABLE1,TABLE2` |
 
 **Optional (not in core workflow):** `scripts/search_glossary.py` — if you need business terms or KPI definitions when scoping the domain: `python scripts/search_glossary.py --keyword "term\|KPI" --folder documents/`.
+
+## Sampling meaningful data
+
+When exploring table data (e.g. via `sample_data` or ad-hoc queries), **do not rely on "first N" or "last N" rows only** — those often are empty, null-heavy, or not representative.
+
+- **Prefer recent, populated rows:** If the table has a date/time or batch column (e.g. `load_date`, `created_at`, `batch_id`, `snapshot_date`), sample by **ordering by that column descending** and taking a small limit (e.g. 10–50 rows), so you see the most recent, usually filled data.
+- **If the script does not support ordering:** Extend it with an option (e.g. `--order-by column_name --order-dir DESC`) or run a small ad-hoc query with `ORDER BY <date/key> DESC LIMIT N` and use that to interpret the table; then document in session notes that sampling strategy was "recent by &lt;column&gt;".
+- **Avoid:** Blindly taking the first/last N rows without checking for null-heavy or placeholder rows; treat such samples as "may not be representative" and note in the domain doc.
+
+## Verify joins with mini-queries
+
+After `find_relationships` suggests join paths, **verify each candidate relationship** with a real join on a tiny amount of data so the map reflects what actually works.
+
+- **Run a mini verification query** per candidate (table pair + join keys), for example:
+  - `SELECT 1 FROM schema.t1 t1 INNER JOIN schema.t2 t2 ON t1.join_key = t2.join_key LIMIT 1;` (adapt to DB dialect).
+  - Use **LIMIT 1** or **LIMIT 5** only — never run full joins for verification, to avoid impacting the database.
+- **Interpret result:** If the query returns at least one row, mark the relationship as **verified**. If it returns no rows, mark as **unverified** or **no overlapping data in sample** and note in the domain doc (e.g. in Relationships table or Session notes) so future users know the join path was not confirmed.
+- **Document in domain.md:** In the Relationships table, add a short note per row (e.g. "verified with mini-query" or "unverified — no rows in sample").
 
 ## Workflow (with checkpoints)
 
@@ -65,7 +83,7 @@ Run in order. **Stop at each [MAP CHECKPOINT]** and wait for user confirmation b
 - **2a.** Search for relevant tables and columns:
   - `python scripts/search_schema.py --keyword "…" --db DWH` (and/or other db aliases)
   - `python scripts/search_documents.py --keyword "…" --folder documents/` if documents exist
-- **2b.** Optionally: `check_table`, `sample_data` for key tables to clarify meaning and volume.
+- **2b.** Optionally: `check_table`, then **sample meaningful data** for key tables (see [Sampling meaningful data](#sampling-meaningful-data)) to clarify meaning and volume.
 - **2c.** Produce a short **candidate table list**: schema.table, brief description, why it belongs to this domain.
 
 **[MAP CHECKPOINT 2]** — Confirm table list: which to include, which to drop, any missing tables (user can name them). Then proceed with the confirmed set only.
@@ -75,7 +93,8 @@ Run in order. **Stop at each [MAP CHECKPOINT]** and wait for user confirmation b
 - **3a.** For the confirmed tables, find relationships:
   - `python scripts/find_relationships.py --schema SCHEMA --table TABLE --db DWH`
   - For pairs: `--tables TABLE1,TABLE2`
-- **3b.** Summarize: join paths, FK-like links, and (if known) main data flow direction (e.g. source → staging → fact/dim).
+- **3b.** **Verify each candidate join with a mini-query** (see [Verify joins with mini-queries](#verify-joins-with-mini-queries)): run a small SELECT ... JOIN ... LIMIT 1 (or LIMIT 5) to confirm the join returns rows. Mark relationships that fail or return no rows as "unverified" or "no overlapping data in sample".
+- **3c.** Summarize: join paths, FK-like links, verification result per path, and (if known) main data flow direction (e.g. source → staging → fact/dim).
 
 **[MAP CHECKPOINT 3]** — Confirm relationships and flow: correct joins, add/remove links, note important filters or caveats.
 
@@ -120,9 +139,9 @@ Run in order. **Stop at each [MAP CHECKPOINT]** and wait for user confirmation b
 | ... | Fact / Dimension / Staging / … | ... |
 
 ## Relationships
-| From | To | Join / relationship | Notes |
-|------|----|---------------------|-------|
-| ... | ... | ... | ... |
+| From | To | Join / relationship | Verified | Notes |
+|------|----|---------------------|----------|-------|
+| ... | ... | ... | yes / no / unverified | e.g. mini-query returned rows, or no overlapping data |
 
 ## Data flow
 {Short description: e.g. source → staging → fact/dim, or main ETL/load order.}
